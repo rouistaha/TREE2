@@ -1,0 +1,42 @@
+<div *ngIf="!showSecret">
+  <ng-particles
+  [id]="id"
+  [options]="particlesOptions"
+  [particlesInit]="particlesInit"
+></ng-particles>
+
+<div class="content">
+  <h1 class="typewriter">Katkoutaa 💖 Welcome to Our World</h1>
+</div>
+</div>
+  <audio #audioPlayer src="../../../../assets/music.mp3" loop></audio>
+
+
+<div (click)="revealSecret()" class="easter-egg">🐰</div>
+
+
+<div *ngIf="showSecret" class="slideshow">
+<div class="slide">
+  <ng-container [ngSwitch]="currentMemory.type">
+    <img *ngSwitchCase="'image'" [src]="currentMemory.src" alt="Memory" />
+    <video
+      *ngSwitchCase="'video'"
+      [src]="currentMemory.src"
+      controls
+      autoplay
+      muted
+      loop
+    ></video>
+  </ng-container>
+
+  <p>{{ currentMemory.message }}</p>
+</div>
+
+
+  <div class="controls">
+    <button (click)="prevSlide()" [disabled]="currentIndex === 0">← Prev</button>
+    <button (click)="nextSlide()" [disabled]="currentIndex === memoryGallery.length - 1">Next →</button>
+  </div>
+</div>
+
+

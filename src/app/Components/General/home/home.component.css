@@ -1,0 +1,194 @@
+.content {
+  position: relative;
+  text-align: center;
+  margin-top: 5rem;
+
+        -webkit-user-select: none;
+        -webkit-touch-callout: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+
+}
+
+.typewriter {
+  overflow: hidden;
+  border-right: 0.15em solid pink;
+  white-space: nowrap;
+  animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+  font-family: 'Dancing Script', cursive;
+  font-size: 2em;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: pink;
+  }
+}
+
+.easter-egg {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  cursor: pointer;
+  opacity: 0.5;
+  font-size: 24px;
+  transition: opacity 0.3s;
+}
+
+.easter-egg:hover {
+  opacity: 1;
+}
+
+.secret-message {
+  margin-top: 2rem;
+  font-size: 1.5rem;
+  color: #ff69b4;
+  animation: fadeIn 2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+.gallery {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.memory-card {
+  background-color: #fff0f5;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(255, 105, 180, 0.2);
+  max-width: 90%;
+  text-align: center;
+  animation: fadeInUp 1s ease;
+}
+
+.memory-card img {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: 3px solid pink;
+}
+
+.memory-card p {
+  font-size: 1.1rem;
+  color: #c2185b;
+  font-family: 'Dancing Script', cursive;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.slideshow {
+  margin-top: 2rem;
+  text-align: center;
+  max-width: 90%;
+  margin-inline: auto;
+  position: relative;
+}
+
+.slide {
+  background-color: FFF2EB;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(255, 105, 180, 0.2);
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.slide img {
+  width: 100%;
+  max-width: 300px;
+  max-height: 300px;
+  border-radius: 10px;
+  border: 3px solid #FFDCDC;
+  margin-bottom: 1rem;
+}
+
+.slide p {
+  font-size: 1.3rem;
+  color: #fcc0c0;
+}
+
+.controls {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.controls button {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  background-color: #FFDCDC;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.controls button:hover {
+  background-color: #ffb6d1;
+}
+
+.controls button:disabled {
+  background-color: #f3d3e7;
+  color: #aaa;
+  cursor: not-allowed;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide video {
+  width: 100%;
+  max-width: 300px;
+    max-height: 300px;
+  border-radius: 10px;
+  border: 3px solid pink;
+  margin-bottom: 1rem;
+}

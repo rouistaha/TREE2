@@ -5,6 +5,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { DataService } from 'src/app/data.service';
 import {
   MoveDirection,
   ClickMode,
@@ -23,7 +24,8 @@ import { loadSlim } from 'tsparticles-slim';
 export class HomeComponent implements AfterViewInit {
   @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
 
-  memoryGallery = [
+  public currentIndex = 0;
+  public memoryGallery = [
     {
       src: 'assets/memories/1.jpg',
       message: 'First pic i took of u - neklou fl malfouf men hamem linf btw i was gonna say nhebek waqtha khoft hh',
@@ -177,11 +179,14 @@ export class HomeComponent implements AfterViewInit {
   ];
 
 
-  id = 'tsparticles';
-  isPlaying = true;
-  showSecret = false;
+  public id = 'tsparticles';
+  public isPlaying = true;
+  public showSecret = false;
+  public showTimeline = false;
+  public showStoryGame = false;
+  public showWheel = false;
 
-  particlesOptions = {
+  public particlesOptions = {
   background: {
     color: { value: '#FFF2EB' }
   },
@@ -230,8 +235,19 @@ export class HomeComponent implements AfterViewInit {
     }
   },
   detectRetina: true
-};
+  };
 
+
+public timelineMemories = [
+  { date: '29 June 2024', text: 'Our very first date 💘 — nervous smiles, gentle laughs, unforgettable vibes.' },
+  { date: '08 September 2024', text: 'We made it official 💑 — “It’s us now”, and it felt just right.' },
+  { date: '28 September 2024', text: 'First “I love you” 💖 — the moment everything changed forever.' },
+];
+
+
+  constructor(public dataService : DataService){
+
+  }
 
   async particlesInit(engine: Engine): Promise<void> {
     await loadSlim(engine);
@@ -252,24 +268,81 @@ export class HomeComponent implements AfterViewInit {
   }
 
   revealSecret() {
+    this.resetViews()
     this.showSecret = !this.showSecret;
+    const audio = this.audioPlayer.nativeElement;
+    audio.volume = 0.3; // 🎵 Set to ~30% volume
+    audio.play().catch((err) => {
+      console.warn('Autoplay failed:', err);
+    });
   }
 
-  currentIndex = 0;
 
-get currentMemory() {
-  return this.memoryGallery[this.currentIndex];
-}
-
-nextSlide() {
-  if (this.currentIndex < this.memoryGallery.length - 1) {
-    this.currentIndex++;
+  get currentMemory() {
+    return this.memoryGallery[this.currentIndex];
   }
-}
 
-prevSlide() {
-  if (this.currentIndex > 0) {
-    this.currentIndex--;
+  nextSlide() {
+    if (this.currentIndex < this.memoryGallery.length - 1) {
+      this.currentIndex++;
+    }
   }
-}
+
+  prevSlide() {
+    if (this.currentIndex > 0) {
+      this.currentIndex--;
+    }
+  }
+
+  showTimelineFun() {
+    this.resetViews();
+    this.showTimeline = !this.showTimeline;
+  }
+
+  showStoryGameFun() {
+    this.resetViews();
+    this.showStoryGame = !this.showStoryGame;
+  }
+
+  showWheelFun() {
+    this.resetViews();
+    this.showWheel = !this.showWheel
+  }
+
+  resetViews() {
+    this.showSecret = false;
+    this.showTimeline = false;
+    this.showStoryGame = false;
+    this.showWheel = false;
+  }
+
+
+    questions = [
+    {
+      question: 'You see a cute café, do you enter?',
+      options: ['Yes, with her 💕', 'No, let’s walk more!'],
+    },
+    {
+      question: 'You find a lost kitten, do you pick it up?',
+      options: ['Yes and name it Meowey 🐱', 'No, maybe it has an owner.'],
+    },
+    {
+      question: 'Time for dessert! What do you get?',
+      options: ['Ice cream 🍦', 'Chocolate lava cake 🍫'],
+    },
+  ];
+  currentQuestionIndex = 0;
+  get currentQuestion() {
+    return this.questions[this.currentQuestionIndex];
+  }
+  chosenAnswer: string | null = null;
+
+  chooseOption(option: string) {
+    this.chosenAnswer = option;
+    setTimeout(() => {
+      this.chosenAnswer = null;
+      this.currentQuestionIndex =
+        (this.currentQuestionIndex + 1) % this.questions.length;
+    }, 1500);
+  }
 }

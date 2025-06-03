@@ -39,6 +39,8 @@ import localeEn from '@angular/common/locales/en';
 import localeDe from '@angular/common/locales/de';
 import localeAr from '@angular/common/locales/ar';
 import { NgParticlesModule } from 'ng-particles';
+import { WheelComponent } from './Components/General/wheel/wheel.component';
+import { OptionsComponent } from './Components/General/options/options.component';
 
 const locale = navigator.language.split('-')[0];
 
@@ -70,6 +72,8 @@ if (availableLocales.includes(locale)) {
 @NgModule({ declarations: [
         AppComponent,
         HomeComponent,
+        WheelComponent,
+        OptionsComponent,
     ],
     bootstrap: [AppComponent], imports: [
         BrowserModule,
@@ -102,7 +106,7 @@ if (availableLocales.includes(locale)) {
         MatButtonToggleModule,
         MatSlideToggleModule,
         MatStepperModule,
-        NgParticlesModule  
+        NgParticlesModule
     ], providers: [
         provideAnimationsAsync(),
         { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },

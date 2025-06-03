@@ -1,0 +1,22 @@
+.top-margin {
+  margin-top: 50px;
+}
+.developers-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.developer-item {
+  flex: 1 1 300px; /* Grow, shrink, basis */
+  max-width: 400px;
+}
+  
+.add-developer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;
+  gap: 12px;
+}

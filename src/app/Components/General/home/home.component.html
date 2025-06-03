@@ -1,18 +1,22 @@
-<div *ngIf="!showSecret">
-  <ng-particles
-  [id]="id"
-  [options]="particlesOptions"
-  [particlesInit]="particlesInit"
-></ng-particles>
 
-<div class="content">
-  <h1 class="typewriter">Katkoutaa 💖 Welcome to Our World</h1>
+<div *ngIf="!showSecret && !showTimeline && !showStoryGame && !showWheel">
+  <ng-particles [id]="id" [options]="particlesOptions" [particlesInit]="particlesInit"></ng-particles>
+  <div class="content">
+    <h1 class="typewriter">Katkoutaa 💖 Welcome to Our World</h1>
+    <div class="subtitle">A little space just for us 💫</div>
+  </div>
 </div>
+<audio #audioPlayer src="../../../../assets/music.mp3" loop></audio>
+
+<!-- Easter egg emojis -->
+<div class="easter-egg-container">
+  <div class="easter-egg home" (click)="resetViews()">🏠</div>
+  <div class="easter-egg photo" (click)="revealSecret()">🐰</div>
+  <div class="easter-egg memory" (click)="showTimelineFun()">📅</div>
+  <div class="easter-egg game" (click)="showStoryGameFun()">❓</div>
+  <div class="easter-egg wheel" (click)="showWheelFun()">🎡</div>
 </div>
-  <audio #audioPlayer src="../../../../assets/music.mp3" loop></audio>
 
-
-<div (click)="revealSecret()" class="easter-egg">🐰</div>
 
 
 <div *ngIf="showSecret" class="slideshow">
@@ -39,4 +43,29 @@
   </div>
 </div>
 
+<!-- Timeline View -->
+<div *ngIf="showTimeline" class="timeline">
+  <div *ngFor="let memory of timelineMemories; let i = index" class="timeline-entry">
+    <div class="timeline-marker"></div>
+    <div class="timeline-content">
+      <h3>{{ memory.date }}</h3>
+      <p>{{ memory.text }}</p>
+    </div>
+  </div>
+</div>
 
+
+<!-- Choose Your Path Game -->
+<div *ngIf="showStoryGame" class="game-box">
+</div>
+
+<!-- Spin the Wheel -->
+<div *ngIf="showWheel" class="wheel-container">
+  <div class="content">
+    <h1 class="typewriter">Spin MEEEEEE</h1>
+  </div>
+
+  <div style="display: flex; justify-content: center; align-items: center">
+    <app-wheel [options]="(dataService.option$ | async) ?? []"></app-wheel>
+  </div>
+</div>

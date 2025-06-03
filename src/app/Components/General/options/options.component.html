@@ -1,0 +1,35 @@
+<div class="developers-container">
+  <div class="developer-item" *ngFor="let option of option$ | async; let i = index">
+    <mat-form-field class="example-form-field" appearance="outline" style="width: 100%;">
+      <mat-label>Developer {{ i + 1 }}</mat-label>
+      <input matInput type="text" [value]="option" (input)="onOptionChange($event)"  />
+
+      <button
+        mat-button
+        *ngIf="option"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="deleteOpt(option)"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+</div>
+
+<div class="add-developer-container">
+  <mat-form-field class="example-form-field" appearance="outline" style="width: 250px;">
+    <mat-label>Add Developer</mat-label>
+    <input matInput type="text" [(ngModel)]="newDeveloper" />
+  </mat-form-field>
+
+  <button
+    mat-mini-fab
+    aria-label="Add new developer"
+    (click)="addNewDeveloper(newDeveloper)"
+    [disabled]="!newDeveloper"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

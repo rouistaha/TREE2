@@ -1,13 +1,13 @@
+
 .content {
   position: relative;
   text-align: center;
   margin-top: 5rem;
-
-        -webkit-user-select: none;
-        -webkit-touch-callout: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 
 }
 
@@ -18,6 +18,7 @@
   animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
   font-family: 'Dancing Script', cursive;
   font-size: 2em;
+  text-shadow: 0 0 10px #ffc0cb, 0 0 20px #ffb6c1;
 }
 
 @keyframes typing {
@@ -39,19 +40,8 @@
   }
 }
 
-.easter-egg {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  cursor: pointer;
-  opacity: 0.5;
-  font-size: 24px;
-  transition: opacity 0.3s;
-}
 
-.easter-egg:hover {
-  opacity: 1;
-}
+
 
 .secret-message {
   margin-top: 2rem;
@@ -131,7 +121,6 @@
 }
 
 .slide img {
-  width: 100%;
   max-width: 300px;
   max-height: 300px;
   border-radius: 10px;
@@ -191,4 +180,206 @@
   border-radius: 10px;
   border: 3px solid pink;
   margin-bottom: 1rem;
+}
+
+
+.content h1 {
+  font-size: clamp(1.5rem, 5vw, 3rem);
+  padding: 0 1rem;
+}
+
+.memory-card img,
+.slide img,
+.slide video {
+  max-width: 90vw;
+  height: auto;
+}
+
+
+
+.subtitle {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  color: #24000c;
+  animation: fadeIn 2s ease-in;
+  font-family: 'Dancing Script', cursive;
+}
+
+.easter-egg-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  z-index: 1000;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+.easter-egg {
+  cursor: pointer;
+  font-size: 28px; /* Make all icons same size */
+  opacity: 0.5;
+  transition: opacity 0.3s, transform 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.easter-egg:hover {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+
+
+.timeline {
+  position: relative;
+  margin: auto;
+  margin-top: 50px;
+  padding-left: 40px;
+  border-left: 3px solid #d81b60; /* main timeline line */
+  max-width: 600px;
+}
+
+.timeline-entry {
+  position: relative;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.timeline-marker {
+  position: absolute;
+  left: -13px; /* to sit centered on the border line */
+  top: 5px;
+  width: 18px;
+  height: 18px;
+  background-color: #d81b60;
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 0 8px rgba(216, 27, 96, 0.6);
+}
+
+.timeline-content {
+  background: #fff0f6;
+  border-radius: 8px;
+  padding: 12px 18px;
+  box-shadow: 0 2px 6px rgba(216, 27, 96, 0.2);
+  width: 100%;
+}
+
+.timeline-content h3 {
+  margin: 0 0 6px 0;
+  color: #ad1457;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.timeline-content p {
+  margin: 0;
+  color: #4a4a4a;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+
+/* Story Game Section */
+.story-game {
+  margin-top: 2rem;
+  animation: fadeIn 1s ease;
+  text-align: center;
+  color: #8e24aa;
+  font-family: 'Dancing Script', cursive;
+}
+
+
+
+
+
+.wheel-container {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  margin: auto;
+}
+
+.wheel {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 5px solid #444;
+  position: relative;
+  transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
+  overflow: hidden;
+}
+
+.segment {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  top: 50%;
+  left: 50%;
+  transform-origin: 0% 0%;
+  background-color: #f1c40f;
+  border-right: 2px solid #fff;
+  text-align: right;
+  padding-right: 10px;
+  box-sizing: border-box;
+}
+
+.segment:nth-child(even) {
+  background-color: #e67e22;
+}
+
+.segment span {
+  display: inline-block;
+  transform: rotate(30deg);
+  color: #fff;
+  font-weight: bold;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.pointer {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 24px;
+  color: red;
+}
+
+.segment:nth-child(1) {
+  background-color: #e74c3c; /* red */
+}
+
+.segment:nth-child(2) {
+  background-color: #8e44ad; /* purple */
+}
+
+.segment:nth-child(3) {
+  background-color: #3498db; /* blue */
+}
+
+.segment:nth-child(4) {
+  background-color: #27ae60; /* green */
+}
+
+.segment:nth-child(5) {
+  background-color: #f39c12; /* orange */
+}
+
+.segment:nth-child(6) {
+  background-color: #d35400; /* dark orange */
+}
+
+.segment:nth-child(7) {
+  background-color: #1abc9c; /* teal */
+}
+
+.segment:nth-child(8) {
+  background-color: #2c3e50; /* dark blue */
 }

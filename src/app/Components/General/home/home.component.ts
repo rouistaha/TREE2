@@ -21,7 +21,7 @@ import { loadSlim } from 'tsparticles-slim';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'], // fixed typo from 'styleUrl'
 })
-export class HomeComponent implements AfterViewInit {
+export class HomeComponent implements AfterViewInit, OnInit {
   @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
 
   public currentIndex = 0;
@@ -247,6 +247,16 @@ export class HomeComponent implements AfterViewInit {
 
   constructor(public dataService : DataService){
 
+  }
+  
+  ngOnInit(): void {
+    document.addEventListener('click', this.handleFirstInteraction.bind(this), { once: true });
+  }
+
+  handleFirstInteraction() {
+  this.audioPlayer.nativeElement.play().catch((err) => {
+    console.warn('Autoplay failed:', err);
+  });
   }
 
   async particlesInit(engine: Engine): Promise<void> {

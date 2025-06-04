@@ -1,12 +1,12 @@
 
-<div *ngIf="!showSecret && !showTimeline && !showStoryGame && !showWheel">
+<div *ngIf="!showSecret && !showTimeline && !showStoryGame && !showWheel && !showCuteMessage">
   <ng-particles [id]="id" [options]="particlesOptions" [particlesInit]="particlesInit"></ng-particles>
   <div class="content">
     <h1 class="typewriter">Katkoutaa 💖 Welcome to Our World</h1>
     <div class="subtitle">A little space just for us 💫</div>
   </div>
 </div>
-<audio #audioPlayer src="../../../../assets/music.mp3" loop></audio>
+<audio #audioPlayer src="assets/music.mp3" loop></audio>
 
 <!-- Easter egg emojis -->
 <div class="easter-egg-container">
@@ -15,6 +15,7 @@
   <div class="easter-egg memory" (click)="showTimelineFun()">📅</div>
   <div class="easter-egg game" (click)="showStoryGameFun()">❓</div>
   <div class="easter-egg wheel" (click)="showWheelFun()">🎡</div>
+  <div class="easter-egg cute" (click)="showCuteMessageFun()">💌</div>
 </div>
 
 
@@ -57,8 +58,38 @@
 
 <!-- Choose Your Path Game -->
 <div *ngIf="showStoryGame" class="game-box">
-</div>
+  <div class="content">
+    <h1 class="typewriter">Café Date Adventures ☕💕</h1>
+    <p class="subtitle">Pick something we can do together at our favorite spot</p>
 
+    <div class="activity-list">
+      <div class="activity-card" (click)="openLink('https://www.nytimes.com/games/wordle/index.html')">
+        🟩 Play Wordle Together
+      </div>
+      <div class="activity-card" (click)="openLink('https://skribbl.io/')">
+        🎨 Draw & Guess (Skribbl)
+      </div>
+      <div class="activity-card" (click)="openLink('https://www.geoguessr.com/free')">
+        🌍 Guess Where We Are (GeoGuessr Free)
+      </div>
+      <div class="activity-card" (click)="openLink('https://guessthesong.io/')">
+        🎵 Guess the Song
+      </div>
+      <div class="activity-card" (click)="openLink('https://recolor.me')">
+        🖌️ Color Together Online (Recolor)
+      </div>
+      <div class="activity-card" (click)="openLink('https://either.io/')">
+        🔮 Would You Rather
+      </div>
+      <div class="activity-card" (click)="openLink('https://playtictactoe.org/')">
+        ❌⭕ Tic Tac Toe War
+      </div>
+      <div class="activity-card" (click)="openLink('https://quickdraw.withgoogle.com/')">
+        ✏️ Quick Draw (Can You Beat AI?)
+      </div>
+    </div>
+  </div>
+</div>
 <!-- Spin the Wheel -->
 <div *ngIf="showWheel" class="wheel-container">
   <div class="content">
@@ -67,5 +98,12 @@
 
   <div style="display: flex; justify-content: center; align-items: center">
     <app-wheel [options]="(dataService.option$ | async) ?? []"></app-wheel>
+  </div>
+</div>
+
+<div *ngIf="showCuteMessage" class="game-box">
+  <div class="content">
+    <h1 class="typewriter">💌 A Message for You</h1>
+    <p class="cute-message">{{ currentCuteMessage }}</p>
   </div>
 </div>

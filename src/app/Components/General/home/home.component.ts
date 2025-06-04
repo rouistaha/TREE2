@@ -185,7 +185,7 @@ export class HomeComponent implements AfterViewInit {
   public showTimeline = false;
   public showStoryGame = false;
   public showWheel = false;
-
+  public showCuteMessage = false;
   public particlesOptions = {
   background: {
     color: { value: '#FFF2EB' }
@@ -238,11 +238,11 @@ export class HomeComponent implements AfterViewInit {
   };
 
 
-public timelineMemories = [
-  { date: '29 June 2024', text: 'Our very first date 💘 — nervous smiles, gentle laughs, unforgettable vibes.' },
-  { date: '08 September 2024', text: 'We made it official 💑 — “It’s us now”, and it felt just right.' },
-  { date: '28 September 2024', text: 'First “I love you” 💖 — the moment everything changed forever.' },
-];
+  public timelineMemories = [
+    { date: '29 June 2024', text: 'Our very first date 💘 — nervous smiles, gentle laughs, unforgettable vibes.' },
+    { date: '08 September 2024', text: 'We made it official 💑 — “It’s us now”, and it felt just right.' },
+    { date: '28 September 2024', text: 'First “I love you” 💖 — the moment everything changed forever.' },
+  ];
 
 
   constructor(public dataService : DataService){
@@ -314,6 +314,7 @@ public timelineMemories = [
     this.showTimeline = false;
     this.showStoryGame = false;
     this.showWheel = false;
+    this.showCuteMessage = false;
   }
 
 
@@ -344,5 +345,41 @@ public timelineMemories = [
       this.currentQuestionIndex =
         (this.currentQuestionIndex + 1) % this.questions.length;
     }, 1500);
+  }
+
+  openLink(url: string): void {
+  window.open(url, '_blank');
+  }
+
+  currentCuteMessage = '';
+
+  cuteMessages = [
+    "You're my calm in the chaos.",
+    "I could talk to you all day and still not have enough time.",
+    "Your laugh is my favorite sound.",
+    "I don't know how you do it, but you make everything better.",
+    "You're the best part of my day, every day.",
+    "You make ordinary moments feel special.",
+    "I like who I am more when I’m with you.",
+    "You make things feel simple, even when they’re not.",
+    "Being around you feels like coming home.",
+    "Somehow, you just always get me.",
+    "You're the kind of person people write songs about.",
+    "There’s no one else I’d rather sit in silence with.",
+    "Even doing nothing with you feels like something.",
+    "You have this quiet way of making everything okay.",
+    "You're proof that the little things matter most."
+  ];
+
+
+  generateCuteMessage() {
+    const randomIndex = Math.floor(Math.random() * this.cuteMessages.length);
+    this.currentCuteMessage = this.cuteMessages[randomIndex];
+  }
+
+  showCuteMessageFun() {
+    this.resetViews();
+    this.showCuteMessage = true;
+    this.generateCuteMessage();
   }
 }

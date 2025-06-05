@@ -190,6 +190,9 @@ export class HomeComponent implements AfterViewInit, OnInit {
   public showStoryGame = false;
   public showWheel = false;
   public showCuteMessage = false;
+  public showbucket = false;
+  public showAvatar = false;
+
   public particlesOptions = {
   background: {
     color: { value: '#FFF2EB' }
@@ -253,10 +256,15 @@ export class HomeComponent implements AfterViewInit, OnInit {
 
   }
   
+  daysLeft: number = 0;
+
   ngOnInit(): void {
     document.addEventListener('click', this.handleFirstInteraction.bind(this), { once: true });
-      this.startFrogLoop();
-
+    this.startFrogLoop();
+    const targetDate = new Date('2025-09-08');
+    const today = new Date();
+    const diff = targetDate.getTime() - today.getTime();
+    this.daysLeft = Math.ceil(diff / (1000 * 3600 * 24));
   }
 
   startFrogLoop() {
@@ -392,6 +400,8 @@ triggerHop() {
     this.showStoryGame = false;
     this.showWheel = false;
     this.showCuteMessage = false;
+    this.showbucket = false;
+    this.showAvatar = false;
   }
 
 
@@ -460,14 +470,43 @@ triggerHop() {
     this.generateCuteMessage();
   }
 
+
   playFrogSound() {
     console.log('hey')
-  const audio = this.frogAudioRef.nativeElement;
+    const audio = this.frogAudioRef.nativeElement;
 
-  // Restart if it's already playing
-  audio.currentTime = 0;
-  audio.play().catch(err => {
-    console.warn('Autoplay failed:', err);
-  });
-}
+    // Restart if it's already playing
+    audio.currentTime = 0;
+    audio.play().catch(err => {
+      console.warn('Autoplay failed:', err);
+    });
+  }
+
+  bucketList = [
+    { text: 'Visit Japan together', done: false },
+    { text: 'Visit Iceland together', done: false },
+    { text: 'Visit newYork together', done: false }
+  ];
+
+  public toggleBucket(item: any) {
+    item.done = !item.done;
+  }
+
+  showBBucket() {
+    this.resetViews();
+    this.showbucket = true;
+  }
+
+  showAvatarr(){
+    this.resetViews();
+    this.showAvatar = true;
+  }
+
+  hats = ['cap', 'graduation-hat', 'hat', 'party-hat', 'santa-hat'];
+  hat: string | null = null;
+
+  public selectHat(h: string) {
+    this.hat = h;
+  }
+
 }

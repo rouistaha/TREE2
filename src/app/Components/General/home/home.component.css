@@ -443,3 +443,113 @@
   animation: hop 0.4s ease-in-out;
 }
 
+
+.bucket-list {
+  background: #fff0f6;
+  border-radius: 20px;
+  padding: 30px;
+  margin: 40px auto;
+  max-width: 500px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.bucket-list h2 {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 28px;
+  color: #d81b60;
+  margin-bottom: 20px;
+}
+
+.bucket-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.bucket-list li {
+  font-size: 18px;
+  padding: 12px 20px;
+  margin: 10px 0;
+  background-color: #ffe3ec;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.bucket-list li:hover {
+  background-color: #ffbcd2;
+}
+
+.bucket-list li.checked {
+  text-decoration: line-through;
+  background-color: #c8e6c9;
+  color: #2e7d32;
+  font-weight: 600;
+  position: relative;
+}
+
+.bucket-list li.checked::before {
+  content: '✔️';
+  position: absolute;
+  left: 16px;
+  font-size: 18px;
+}
+
+.countdown-widget {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 24px;
+}
+
+
+
+.avatar-creator {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.avatar-display {
+  position: relative;
+  display: inline-block;
+  width: 200px;
+  height: auto;
+}
+
+.avatar-base {
+  width: 100%;
+  height: auto;
+  z-index: 1;
+  position: relative;
+}
+
+.avatar-hat {
+  position: absolute;
+  left: 50%;
+  top: -50px;
+  transform: translateX(-50%) scale(0.4); /* Scale down and center horizontally */
+  z-index: 2;
+  pointer-events: none;
+  max-width: 200px;
+  max-height: 200px;
+}
+
+.accessory-picker {
+  margin-top: 15px;
+}
+
+.accessory-picker button {
+  margin: 5px;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 8px;
+  background-color: #fce4ec;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.accessory-picker button:hover {
+  background-color: #f8bbd0;
+}

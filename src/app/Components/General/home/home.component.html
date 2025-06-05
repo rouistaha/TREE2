@@ -1,4 +1,15 @@
 
+<div class="frog-wrapper" (click)="playFrogSound()">
+  <img
+    src="assets/frog-bunny.png"
+    class="frog-bunny"
+    [style.left.px]="frogX"
+    [style.top.px]="frogY"
+    [class.hop]="isHopping"
+  />
+</div>
+<audio #frogAudio src="assets/frog.m4a"></audio>
+
 <div *ngIf="!showSecret && !showTimeline && !showStoryGame && !showWheel && !showCuteMessage">
   <ng-particles [id]="id" [options]="particlesOptions" [particlesInit]="particlesInit"></ng-particles>
   <div class="content">

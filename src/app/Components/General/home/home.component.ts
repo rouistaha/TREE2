@@ -22,7 +22,11 @@ import { loadSlim } from 'tsparticles-slim';
   styleUrls: ['./home.component.css'], // fixed typo from 'styleUrl'
 })
 export class HomeComponent implements AfterViewInit, OnInit {
+  frogX = 100;
+  frogY = 100;
+  isHopping = false;
   @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
+  @ViewChild('frogAudio', { static: true }) frogAudioRef!: ElementRef<HTMLAudioElement>;
 
   public currentIndex = 0;
   public memoryGallery = [
@@ -251,7 +255,70 @@ export class HomeComponent implements AfterViewInit, OnInit {
   
   ngOnInit(): void {
     document.addEventListener('click', this.handleFirstInteraction.bind(this), { once: true });
+      this.startFrogLoop();
+
   }
+
+  startFrogLoop() {
+  this.moveToNextDestination();
+}
+moveToNextDestination() {
+  const frogWidth = 70;  // adjust to actual frog width
+  const frogHeight = 70; // adjust to actual frog height
+  const padding = 20;    // prevent frog from touching screen edges
+
+  const maxX = window.innerWidth - frogWidth - padding;
+  const maxY = window.innerHeight - frogHeight - padding;
+
+  const targetX = padding + Math.floor(Math.random() * maxX);
+  const targetY = padding + Math.floor(Math.random() * maxY);
+
+  const stepSize = 20; // pixels per hop
+  const interval = 300; // ms between hops
+
+  const dx = targetX - this.frogX;
+  const dy = targetY - this.frogY;
+  const distance = Math.hypot(dx, dy);
+  const steps = Math.ceil(distance / stepSize);
+  const stepX = dx / steps;
+  const stepY = dy / steps;
+
+  let currentStep = 0;
+
+  const intervalId = setInterval(() => {
+    if (currentStep >= steps) {
+      clearInterval(intervalId);
+      this.idleHopThenMove();
+      return;
+    }
+
+    this.frogX += stepX;
+    this.frogY += stepY;
+
+    this.triggerHop();
+    currentStep++;
+  }, interval);
+}
+
+idleHopThenMove() {
+  let idleCount = 0;
+  const idleHops = 5;
+  const idleInterval = setInterval(() => {
+    this.triggerHop();
+    idleCount++;
+    if (idleCount >= idleHops) {
+      clearInterval(idleInterval);
+      this.moveToNextDestination();
+    }
+  }, 400);
+}
+
+triggerHop() {
+  this.isHopping = true;
+  setTimeout(() => {
+    this.isHopping = false;
+  }, 300);
+}
 
   handleFirstInteraction() {
   this.audioPlayer.nativeElement.play().catch((err) => {
@@ -392,4 +459,15 @@ export class HomeComponent implements AfterViewInit, OnInit {
     this.showCuteMessage = true;
     this.generateCuteMessage();
   }
+
+  playFrogSound() {
+    console.log('hey')
+  const audio = this.frogAudioRef.nativeElement;
+
+  // Restart if it's already playing
+  audio.currentTime = 0;
+  audio.play().catch(err => {
+    console.warn('Autoplay failed:', err);
+  });
+}
 }
